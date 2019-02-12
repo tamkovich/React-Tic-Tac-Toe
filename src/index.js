@@ -4,7 +4,7 @@ import './index.css'
 
 function Square (props) {
   return (
-    <button className='square' onClick={props.onClick}>
+    <button className={props.isBold ? 'square bold' : 'square'} onClick={props.onClick}>
       {props.value}
     </button>
   )
@@ -12,10 +12,15 @@ function Square (props) {
 
 class Board extends React.Component {
   renderSquare (i) {
+    let isBold = false
+    if (this.props.boldSquare === i) {
+      isBold = true
+    }
     return (
       <Square
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
+        isBold={isBold}
       />
     )
   }
@@ -51,7 +56,8 @@ class Game extends React.Component {
         squares: Array(9).fill(null)
       }],
       stepNumber: 0,
-      xIsNext: true
+      xIsNext: true,
+      boldSquare: null
     }
   }
 
@@ -68,7 +74,8 @@ class Game extends React.Component {
         squares: squares
       }]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
+      boldSquare: i
     })
   }
 
@@ -108,6 +115,7 @@ class Game extends React.Component {
           <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
+            boldSquare={this.state.boldSquare}
           />
         </div>
         <div className='game-info'>
