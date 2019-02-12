@@ -53,11 +53,11 @@ class Game extends React.Component {
     super(props)
     this.state = {
       history: [{
-        squares: Array(9).fill(null)
+        squares: Array(9).fill(null),
+        boldSquare: null
       }],
       stepNumber: 0,
-      xIsNext: true,
-      boldSquare: null
+      xIsNext: true
     }
   }
 
@@ -71,11 +71,11 @@ class Game extends React.Component {
     squares[i] = this.state.xIsNext ? 'X' : 'O'
     this.setState({
       history: history.concat([{
-        squares: squares
+        squares: squares,
+        boldSquare: i
       }]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
-      boldSquare: i
+      xIsNext: !this.state.xIsNext
     })
   }
 
@@ -115,7 +115,7 @@ class Game extends React.Component {
           <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
-            boldSquare={this.state.boldSquare}
+            boldSquare={current.boldSquare}
           />
         </div>
         <div className='game-info'>
