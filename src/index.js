@@ -106,7 +106,15 @@ class Game extends React.Component {
     if (winner) {
       status = 'Winner: ' + winner
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
+      let is_null = false
+      for (let i = 0; i < current.squares.length; ++i) {
+        if (current.squares[i] == null) { is_null = true; break }
+      }
+      if (is_null) {
+        status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
+      } else {
+        status = 'Draw!'
+      }
     }
 
     return (
