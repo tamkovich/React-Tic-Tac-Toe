@@ -40,6 +40,10 @@ ol, ul {
   border-width: 2px 2px 2px 2px; 
 }
 
+.square.win {
+  color: green;
+}
+
 .kbd-navigation .square:focus {
   background: #ddd;
 }
